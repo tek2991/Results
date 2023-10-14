@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Result</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+      integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body class="max-w-5xl mx-auto my-6">
+    <header class="font-serif">
+      <div class="flex justify-between">
+        <div class="w-32 aspect-square">
+          <img src="{{ seba_logo }}" alt="SEBA LOGO" />
+        </div>
+        <div class="text-center flex flex-col justify-center items-center">
+          <h1 class="font-bold text-2xl py-2">East Point Montessori School</h1>
+          <p class="font-semibold">
+            Birkuchi, Narengi Tinali, Guwahati
+            <br />
+            781026, SEBA affiliation code: 27H1026
+          </p>
+        </div>
+        <div class="w-32 aspect-square">
+          <img src="{{ school_logo }}" alt="SCHOOL LOGO" />
+        </div>
+      </div>
+    </header>
+
+    <section class="font-serif mt-4">
+      <div class="text-center mt-6">
+        <h2 class="font-semibold text-xl">Term I Report Card</h2>
+        <p class="font-semibold text-lg">
+          Class: {{ student_class }}
+          <br />
+          Academic Year: 2023-24
+        </p>
+      </div>
+      <div class="flex justify-between font-semibold">
+        <p>Name: {{ student_name }}</p>
+
+        <p>Roll No.: {{ student_roll_no }}</p>
+      </div>
+    </section>
+
+    <section class="mt-2">
+      <table class="border-collapse border-2 border-gray-500 w-full">
+        <thead>
+          <tr>
+            <th colspan="9" class="text-lg p-1">Scholastic Areas</th>
+          </tr>
+          <tr>
+            <th rowspan="2" class="border border-gray-500 p-1">Subjects</th>
+            <th colspan="2" class="border border-gray-500 p-1">Term I</th>
+            <th colspan="2" class="border border-gray-500 p-1">Term II</th>
+            <th colspan="2" class="border border-gray-500 p-1">Term III</th>
+            <th rowspan="2" class="border border-gray-500 p-1">Weight</th>
+            <th rowspan="2" class="border border-gray-500 p-1">Grade</th>
+          </tr>
+          <tr>
+            <th class="border border-gray-500 p-1">Marks</th>
+            <th class="border border-gray-500 p-1">Grade</th>
+            <th class="border border-gray-500 p-1">Marks</th>
+            <th class="border border-gray-500 p-1">Grade</th>
+            <th class="border border-gray-500 p-1">Marks</th>
+            <th class="border border-gray-500 p-1">Grade</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </body>
+</html>

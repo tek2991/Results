@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Result</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+      integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body class="max-w-5xl mx-auto my-6">
+    <header class="font-serif">
+      <div class="flex justify-between">
+        <div class="w-32 aspect-square">
+          <img src="{{ seba_logo }}" alt="SEBA LOGO" />
+        </div>
+        <div class="text-center flex flex-col justify-center items-center">
+          <h1 class="font-bold text-2xl py-2">East Point Montessori School</h1>
+          <p class="font-semibold">
+            Birkuchi, Narengi Tinali, Guwahati - 781026,
+            <br />
+            SEBA affiliation code: 27H1056
+          </p>
+        </div>
+        <div class="w-32 aspect-square">
+          <img src="{{ school_logo }}" alt="SCHOOL LOGO" />
+        </div>
+      </div>
+    </header>
+
+    <section class="font-serif mt-4">
+      <div class="text-center mt-6">
+        <h2 class="font-semibold text-xl">Term I Report Card</h2>
+        <p class="font-semibold text-lg">
+          Class: {{ data['Class'] }} | Section: {{ data['Section'] }}
+          <br />
+          Academic Year: 2023-24
+        </p>
+      </div>
+      <div class="flex justify-between font-semibold">
+        <p>Name: {{ data['Student Name'] }}</p>
+
+        <p>Roll No.: {{ "%.0f"|format(data['Roll No']) }}</p>
+      </div>
+    </section>
+
+    <section class="mt-2">
+      <table class="border-collapse border-2 border-gray-500 w-full">
+        <thead>
+          <tr>
+            <th colspan="9" class="text-lg p-1">Scholastic Areas</th>
+          </tr>
+          <tr>
+            <th rowspan="2" class="border border-gray-500 p-1">Subjects</th>
+
+            {% for index, exam in exams.items() %}
+            <th colspan="2" class="border border-gray-500 p-1">{{ exam }}</th>
+            {% endfor %}
+
+            <th rowspan="2" class="border border-gray-500 p-1">
+              Weighted Score
+            </th>
+            <th rowspan="2" class="border border-gray-500 p-1">Result</th>
+          </tr>
+          <tr>
+            {% for index, exam in exams.items() %}
+            <th class="border border-gray-500 p-1">Total</th>
+            <th class="border border-gray-500 p-1">Score</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for subject in subjects %}
+          <tr>
+            <td class="border border-gray-500 p-1 text-center">
+              {{ subject }}
+            </td>
+            {% for index, exam in exams.items() %}
+            <td class="border border-gray-500 p-1 text-center">
+              {{ data[index + '_' + subject + '_total'] }}
+            </td>
+            <td class="border border-gray-500 p-1 text-right">
+              {{ "%.2f"|format(data[index + '_' + subject]) }}
+            </td>
+            {% endfor %}
+            <td class="border border-gray-500 p-1 text-center">
+              {{ "%.2f"|format(data['Weightage ' + subject]) }}
+            </td>
+            <td class="border border-gray-500 p-1 text-center">
+              {{ data['Result ' + subject] }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <table class="border-collapse border-2 border-gray-500 w-full mt-8">
+        <thead>
+          <tr>
+            <th colspan="2" class="text-lg p-1">
+              Summary: Term I - Scholastic Areas
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-gray-500 p-1 text-center">
+              Total Marks ({{ "%.0f"|format(data['Total Marks']) }})
+            </td>
+            <td class="border border-gray-500 p-1 text-center">
+              {{ "%.2f"|format(data['Total Weightage']) }}
+            </td>
+          </tr>
+          <tr>
+            <td class="border border-gray-500 p-1 text-center">Percentage</td>
+            <td class="border border-gray-500 p-1 text-center">
+              {{ "%.2f"|format(data['Percentage']) }} %
+            </td>
+          </tr>
+          <tr>
+            <td class="border border-gray-500 p-1 text-center">Result</td>
+            <td class="border border-gray-500 p-1 text-center">
+              {{ data['Result'] }}
+            </td>
+          </tr>
+          <tr>
+            <td class="border border-gray-500 p-1 text-center">Rank</td>
+            <td class="border border-gray-500 p-1 text-center">
+              {{ "%.0f"|format(data['Rank']) }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <div class="text-lg font-semibold mt-8">
+        <div class="flex justify-between">
+          <p class="w-1/3">Date:</p>
+          <p class="w-2/3">Class Teacher Remarks:</p>
+        </div>
+        <div class="flex justify-between mt-14">
+          <div class="w-1/3 h-full">
+            <img src="{{ sig_examiner }}" alt="SIG_EXAMINER" class="h-12 ml-10" />
+            <p>Examiner Signature</p>
+          </div>
+          <div class="w-1/3 h-full">
+            <p class="mt-12">Class Teacher Signature</p>
+          </div>
+          <div class="w-1/3 h-full text-right">
+            <img src="{{ sig_principal }}" alt="SIG_EXAMINER" class="h-12 ml-auto mr-10" />
+            <p>Principal Signature</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
